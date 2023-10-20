@@ -1,0 +1,22 @@
+{
+  "name": "health-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node-cron": "^3.0.10",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^2.6.7",
+    "http": "^0.0.1-security",
+    "node-cron": "^3.0.2",
+    "node-fetch": "^3.3.2"
+  }
+}
