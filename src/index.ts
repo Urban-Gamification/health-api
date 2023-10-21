@@ -4,17 +4,55 @@ import helmet from "helmet";
 import "dotenv/config";
 import { CronJob } from "cron";
 
-const job = new CronJob(
-  "* * * * * *",
-  function () {
-    console.log("You will see this message every second");
-  },
+
+// const object with properties name and lastName
+const stepsAchivement = {
+  username: "alice",
+  activity: "steps",
+  achivement: "6000 steps"
+};
+
+const sleepAchivement = {
+  username: "alice",
+  activity: "sleep",
+  achivement: "82"
+};
+
+
+// function to make HTTP POST request to localhost:3000
+const makePostRequest = async (achivement: any) => {
+  try {
+    const response = await fetch("http://localhost:3000/api/health", {
+      method: "POST",
+      body: JSON.stringify(achivement),
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+const stepsJob = new CronJob(
+  "0 * * * * *",
+  () => makePostRequest(stepsAchivement),
   null,
   true,
   "America/Los_Angeles"
 );
 
-job.start();
+const sleepJob = new CronJob(
+  "0 0 * * * *",
+  () => makePostRequest(sleepAchivement),
+  null,
+  true,
+  "America/Los_Angeles"
+);
+
+stepsJob.start();
+sleepJob.start();
 
 
 const PORT = process.env.PORT || 8080;
